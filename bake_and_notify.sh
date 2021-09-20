@@ -1,7 +1,7 @@
 #!/bin/bash
 cd `dirname $0`
 
-discord_token={{DISCORD_TOKEN}}
+discord_token=
 
 cd stationeers_resources/locales
 
@@ -21,13 +21,18 @@ else
   echo "clear and update"
   cd ../
   git fetch
-  git reset --hard origin/master
+  git reset --hard origin/main
   git clean -d -f
-  git submodule update --remote
+  git submodule update --remote --merge
   echo "done(clear and update)"
 
   echo "bake and notify"
   martian bake
+
+  git add *
+  git commit -m "generate to ${origin_commit_id}"
+  git push origin main
+
   sh release.sh
   martian notify --token ${discord_token} assets
   echo "done(bake and notify)"
