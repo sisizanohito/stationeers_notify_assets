@@ -1,0 +1,4 @@
+[submodule "stationeers_resources"]
+	path = stationeers_resources
+	url = git@github.com:sisizanohito/stationeers_resources.git
+	branch = main
